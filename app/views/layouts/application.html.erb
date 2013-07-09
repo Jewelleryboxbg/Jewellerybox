@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jewelleryboxbg</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="page_container">
+		<div id="header" class="row-fluid">
+			<div id="logo" class="span3">
+				<%= link_to image_tag('../images/logo.png'), root_path %>
+			</div>
+			<div id="nav" class="span9">
+                <ul class="menu nav nav-pills pull-right" id="myTab">
+                    <li><a href="#featured-index" data-toggle="tab">Featured</a></li>
+                    <li><a href="#products-index" data-toggle="tab">Catalog</a></li>
+                    <li><a href="#faq-index" data-toggle="tab">F.A.Q.</a></li>
+                </ul>
+				<% if admin_signed_in? %>
+					<ul class="menu nav nav-pills pull-right">
+						<li><%= link_to "logged in as " + current_admin.profile_name, edit_admin_registration_path %></li>
+						<li><%= link_to "Add new Product", new_product_path %></li>
+						<li><%= link_to "Log out", destroy_admin_session_path, method: :delete %></li>
+					</ul>
+				<% end %>
+			</div>
+		</div>
+				<hr />
+		<div id="wrapper">
+			<% if flash[:notice] %>
+				<div class="alert alert-info">
+					<button class="close" data-dismiss="alert">x</button>
+					<%= flash[:notice] %>
+				</div>
+			<% end %>
+			<% if flash[:alert] %>
+				<div class="alert alert-error">
+					<button class="close" data-dismiss="alert">x</button>
+					<%= flash[:alert] %>
+				</div>
+			<% end %>
+
+			<%= yield %>
+		</div>
+	</div>
+</body>
+</html>

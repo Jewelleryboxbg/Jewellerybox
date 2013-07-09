@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid" id="show_product">
+  <div class="row-fluid">
+    <section class="span12">
+      <h1>
+        <span class="product_title span11"><%= @product.title %></span>
+      </h1>
+        <span class="back_button span1"><%= link_to 'Back', products_path %></span>
+        <div class="span12"><p><hr /></p></div>
+    </section>
+    <section class="product_image span5">
+      <%= image_tag @product.gallery.url(:medium) %>
+    </section>
+    <section class="info_right span6">
+      <section class="product_description offset3 span9">
+      <p><%= @product.description %></p>
+      </section>
+      <section class="offset3 span9">
+        <br />
+        <p><em>
+          <span class="product_item_id">Product ID: <%= @product.item_id %></span><br />
+          <span class="product_quantity">Quantity: <%= @product.quantity %> left</span><br />
+          <span class="product_discount">Discount: <%= @product.discount %> BGN</span>
+        </em></p><br />
+      </section>
+      <section class="product_price_class offset1 span11">
+        <p>Price class: <%= @product.price_class %></p>
+      </section>
+      <section class="product_warranty product_guarantee offset1 span11">
+        <p>Warranty: <%= @product.warranty %><br />Guarantee: <%= @product.guarantee %></p>
+      </section>
+    </section>
+    <div id="show-menu-bottom" class="span12">
+      <div class="span4">
+        <%= link_to 'Back', products_path %>
+        <% if admin_signed_in? %>
+          <%= link_to 'Edit', edit_product_path(@product) %>
+        <% end %>
+      </div>
+      <div class="span4">
+        <p>Order now</p>
+      </div>
+      <div class="span4">
+        <p>How to Order?<p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+
+

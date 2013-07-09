@@ -1,0 +1,30 @@
+<%= simple_form_for @product, :html => { :multipart => true, class: "form-horizontal" } do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :title, input_html: { class: 'input-xxlarge' }, placeholder: '(Insert EPIC NAME here)' %>
+  <%= f.input :description, input_html: { class: 'input-xxlarge', rows: 4 }, placeholder: '(a rly shrt dscrptn)' %>
+  <%= f.input :item_id, placeholder: '(must be unique)' %>
+  <%= f.input :discount, placeholder: '(optional)' %>
+  <%= f.input :price, placeholder: '25 (without BGN)' %>
+  <%= f.input :price_class, placeholder: 'A (0-15 A, 15-30 AA, 30-50 AAA)', hint: 'Calculate without the included discount' %>
+  <%= f.input :quantity, placeholder: '(12)', hint: 'Update with the EDIT buttons' %>
+  <%= f.input :warranty, placeholder: '(30 day full coverage)' %>
+  <%= f.input :guarantee, placeholder: '(30 day money back)' %>
+
+  <div class="upload_field">
+    <%= f.input :gallery, hint: 'Upload pictures with transparent backgrounds!' %>
+  </div>
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

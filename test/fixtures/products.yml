@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: Awesome Ring
+  description: MyText
+  item_id: 1
+  discount: 1
+  price: 1
+  price_class: MyString
+  quantity: 1
+  warranty: MyString
+  guarantee: MyString
+
+two:
+  title: MyString
+  description: MyText
+  item_id: 1
+  discount: 1
+  price: 1
+  price_class: MyString
+  quantity: 1
+  warranty: MyString
+  guarantee: MyString

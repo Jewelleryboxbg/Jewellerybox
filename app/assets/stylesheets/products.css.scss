@@ -1,0 +1,42 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#show_product {
+	font-family: BankGothic;
+	font-size: 1.1em;
+}
+
+.product_title {
+	font-family: BrushScriptMT;
+	font-size: 1.5em;
+}
+
+.product_item_id {
+	color: #a8a8a8;
+}
+
+.product_warranty {
+	color: #a8a8a8;
+}
+
+.product_price_class {
+	font-size: 1.15em;
+}
+
+.product_description {
+	padding-left: 5px;
+	border-left: 1px solid white;
+}
+
+.product_image img {
+	border-radius: 15px 2px 15px 2px;
+}
+
+#product-thumb img {
+	border-radius: 15px 2px 15px 2px;
+}
+
+.product_price_class_thumb {
+	color: #a8a8a8;
+}
