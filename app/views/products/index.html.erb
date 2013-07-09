@@ -51,6 +51,7 @@
           </ol>
           <!-- Carousel items -->
           <div class="carousel-inner">
+            <% if Product.exists?(3) %>
             <% @products.last(3).each do |product| %>
             <% if product == @products[-3] %>
                 <div id="add-class-to-carousel" class="item active">
@@ -95,6 +96,7 @@
                 </a>
 
             </div>
+            <% end %>
             <% end %>
           </div>
           <!-- Carousel nav -->
