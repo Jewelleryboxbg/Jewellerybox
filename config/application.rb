@@ -60,7 +60,7 @@ module Jewelleryboxbg
     config.assets.version = '1.0'
 
     # Required by Devise
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
 
      # add app/assets/fonts to the asset path
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
