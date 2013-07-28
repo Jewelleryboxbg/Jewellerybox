@@ -1,0 +1,12 @@
+
+<%= image_tag(@picture.asset.url(:large), class: 'img-polariod') %>
+
+<p>
+  <b>Product:</b>
+  <%= @picture.product %>
+</p>
+
+<%= link_to 'Back', product_pictures_path(@product) %> |
+<%= link_to 'Edit', edit_product_picture_path(@product, @picture) %> |
+<%= link_to "Delete", product_picture_path(@product, @picture), method: :delete, data: { confirm: "Are you sure?" } %>
+

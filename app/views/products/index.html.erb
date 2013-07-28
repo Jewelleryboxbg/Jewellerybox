@@ -1,5 +1,3 @@
-
-
 <div class="tab-content">
 
     <!-- THIS IS THE INDEX PAGE -->
@@ -13,6 +11,26 @@
                             <div class="row-fluid">
                                 <div class="span4">
                                     <a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= image_tag product.gallery.url(:thumb) %></a>
+                                          <div id="links">
+                                            <% product.pictures.each do |picture| %>
+                                                  <a href="<%= picture.asset.url %>">
+                                                      <% if picture == Picture.first %>
+                                                        <img src="<%= picture.asset.url(:thumb) %>">
+                                                      <% end %>
+                                                  </a>
+                                            <% end %>
+                                        </div>
+                                        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+                                          <% product.pictures.each do |picture| %>
+                                            <div class="slides"></div>
+                                            <h3 class="title"></h3>
+                                            <a class="prev">‹</a>
+                                            <a class="next">›</a>
+                                            <a class="close">×</a>
+                                            <a class="play-pause"></a>
+                                            <ol class="indicator"></ol>
+                                          <% end %>
+                                        </div>
                                     <p><em><span class="product_price_class_thumb">Class: <%= product.price_class %></span></em></p>
                                 </div>
                                 <div class="span8">
@@ -24,6 +42,7 @@
                                         <li><%= link_to 'Show', product %></li>
                                         <li><%= link_to 'Edit', edit_product_path(product) %></li>
                                         <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                                        <li><%= link_to 'New Picture', new_product_picture_path(product), class: 'btn btn-primary' %></li>
                                     <% end %>
                                 </ul>
                             </div>
@@ -224,10 +243,7 @@
 
 
 
-
-
 </div>
-
 
 
 

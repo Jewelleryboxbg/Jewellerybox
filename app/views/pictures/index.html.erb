@@ -1,0 +1,49 @@
+<h1>Listing pictures <%= link_to 'New Picture', new_product_picture_path(@product), class: 'btn btn-primary' %></h1>
+
+<% @pictures.each do |picture| %>
+  <ul class="thumbnails">
+    <li class="span4">
+      <div class="thumbnail">
+        <%= image_tag(picture.asset.url) %>
+      </div>
+    </li>
+  </ul>
+  <%= link_to 'View full size', product_picture_path(@product, picture) %>
+  <%= link_to 'Edit', edit_product_picture_path(@product, picture) %>
+  <%= link_to "Delete", product_picture_path(@product, picture), method: :delete, data: { confirm: "Are you sure?"} %>
+<% end %>
+
+<div id="links">
+    <% @pictures.each do |picture| %>
+          <a href="<%= picture.asset.url %>">
+              <% if picture == Picture.first %>
+              <img src="<%= picture.asset.url(:medium) %>" style="max-height: 170px; width: auto;">
+              <% end %>
+          </a>
+    <% end %>
+</div>
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <% @pictures.each do |picture| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  <% end %>
+</div>
+
+
+
+<script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+</script>

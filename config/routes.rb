@@ -1,7 +1,12 @@
 Jewelleryboxbg::Application.routes.draw do
+  
+
+
   devise_for :admins
 
-  resources :products
+  resources :products do
+    resources :pictures
+  end
 
   as :admin do
     get '/admin', to: 'devise/sessions#new', as: :login

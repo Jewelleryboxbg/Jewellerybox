@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
+  has_many :pictures
   attr_accessible :description, :discount, :guarantee, :item_id, :price, :price_class, :quantity, :title, :warranty, :gallery
   has_attached_file :gallery, :styles => { :medium => "200x200>", :thumb => "125x125>" }, :default_url => "/images/:style/logo.png"
 
