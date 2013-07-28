@@ -1,0 +1,14 @@
+<%= simple_form_for([@product, @order], html: { class: 'form-horizontal'}) do |f| %>
+
+<div class="form-inputs">
+	<%= f.input :name %>
+	<%= f.input :email %>
+	<%= f.input :title %>
+	<%= f.input :message, input_html: { rows: 4 } %>
+
+</div>
+
+<div>
+	<%= f.button :submit, data: { confirm: "Confirm order?" }, class: 'btn btn-success pull-right' %>
+</div>
+<% end %>

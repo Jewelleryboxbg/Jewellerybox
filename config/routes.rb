@@ -2,10 +2,15 @@ Jewelleryboxbg::Application.routes.draw do
   
 
 
+  
+
+
   devise_for :admins
 
   resources :products do
     resources :pictures
+    resources :order_forms
+    resources :order_form
   end
 
   as :admin do

@@ -1,0 +1,12 @@
+<h1>This is the Order Page</h1>
+<hr />
+
+<% @order.each do |order| %>
+	<div id="orders">
+		<h3><%= order.title %></h3>
+		<p><%= order.name %> has ordered <%= @product.title %></p>
+		<p>Email: <%= order.email %></p>
+		<p>Message: <em><%= order.message %></em></p>
+	</div>
+	<hr />
+<% end %>

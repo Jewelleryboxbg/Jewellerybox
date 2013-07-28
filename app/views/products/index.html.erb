@@ -165,7 +165,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success">Order now!</button>
+        <%= link_to "Order now!", new_product_order_form_path(product), class: "btn btn-success" %>
         <a href="#faq-index" class="btn btn-info" data-toggle="tab" data-dismiss="modal" aria-hidden="true">How to order?</a>
         <button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
         <% if admin_signed_in? && @product %>

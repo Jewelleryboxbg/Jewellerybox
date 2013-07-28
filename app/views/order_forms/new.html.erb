@@ -1,0 +1,35 @@
+<h1><%= @product.title %></h1>
+
+<div class="row row-fluid">
+	<div id="links" class="span4">
+	<% @product.pictures.each do |picture| %>
+		<a href="<%= picture.asset.url %>">
+			<% if picture == Picture.first %>
+				<img src="<%= picture.asset.url(:medium) %>"
+			<% end %>
+		</a>
+	<% end %>
+	</div>
+
+	<div class="span8">
+		<%= render 'form' %>
+		<p>The final price of your order is: <%= @product.price %> BGN.</p>
+	</div>
+
+	<%= link_to 'Cancel', root_url, class: 'btn pull-right' %>
+</div>
+
+
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <% @product.pictures.each do |picture| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  <% end %>
+</div>
