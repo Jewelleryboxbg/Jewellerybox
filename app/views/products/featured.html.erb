@@ -1,0 +1,129 @@
+<script>
+    $(document).ready(function(){$('.carousel').carousel();});
+</script>
+
+<div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    
+    <% if Product.exists?(3) %>
+      <% @products.last(3).each do |product| %>
+        <% if product == @products[-3] %>
+            <div id="add-class-to-carousel" class="item active">
+        <% else %>
+            <div id="add-class-to-carousel" class="item">
+        <% end %>
+              <div id="">
+                <div class="container-fluid" id="show_product">
+                  <div class="row-fluid">
+                    <section class="span12">
+                      <h1>
+                        <span class="product_title span11"><%= product.title %></span>
+                      </h1>
+                        <div class="span12"><p><hr /></p></div>
+                    </section>
+                    <section class="product_image span5">
+                      <% if product.pictures.exists? %>
+                        <div id="links">
+                        <% product.pictures.each do |picture| %>
+                          <a href="<%= picture.asset.url %>" id="gallery">
+                            <% if picture == Picture.first %>
+                              <img src="<%= picture.asset.url(:medium) %>">
+                            <% end %>
+                          </a>
+                        <% end %>
+                        </div>
+                      <% else %>
+                        <%= image_tag product.gallery.url(:medium) %>
+                      <% end %>
+                    </section>
+                    <section class="info_right span6">
+                      <section class="product_description offset3 span9">
+                      <p><%= product.description %></p>
+                      </section>
+                      <section class="offset3 span9">
+                        <br />
+                        <p><em>
+                          <span class="product_item_id">Product ID: <%= product.item_id %></span><br />
+                          <span class="product_quantity">Quantity: <%= product.quantity %> left</span><br />
+                          <span class="product_discount">Discount: <%= product.discount %> BGN</span>
+                        </em></p><br />
+                      </section>
+                      <section class="product_price_class offset1 span11">
+                        <p>Price class: <%= product.price_class %></p>
+                      </section>
+                      <section class="product_warranty product_guarantee offset1 span11">
+                        <p>Warranty: <% if product.warranty? %><%= product.warranty %><% else %><em>No warranty available</em><% end %><br /><% if product.guarantee? %>Guarantee: <%= product.guarantee %><% end %></p>
+                      </section>
+                      <section class="product_order span12">
+                        <% if false %>
+                        <a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" class="btn btn-success pull-right" data-toggle="modal" style="z-inxed: 99;">Order now!</a>
+                        <% end %>
+
+                        <%= link_to "How to order?", faq_path, class: 'btn btn-info pull-right' %>
+                        <%= link_to "Order now!", new_product_order_form_path(product), class: 'btn btn-success pull-right' %>
+
+                      </section>
+                    </section>
+
+                  </div>
+                </div>
+              </div>
+              <div class="span12">
+                
+              </div>
+          </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+<% if false %>
+<% @products.each do |product| %>
+<div id="<%= product.title.gsub(/\s+/, "") %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3><span class="product_title"><%= product.title %></span></h3>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid" id="show_product">
+          <div class="row-fluid">
+            <section class="product_image span6">
+              <%= image_tag product.gallery.url(:medium) %>
+            </section>
+            <section class="info_right span6">
+              <section class="product_description offset3 span9">
+              <p><%= product.description %></p>
+              </section>
+            </section>
+            <select class="span12">
+            </select>
+          </div>
+        </div>
+    </div>
+</div>
+<% end %>
+<% end %>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <% @products.each do |product| %>
+  <% product.pictures.each do |picture| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  <% end %>
+  <% end %>
+</div>

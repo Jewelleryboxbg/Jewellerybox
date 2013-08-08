@@ -1,17 +1,52 @@
 <h1><%= @product.title %></h1>
 
 <div class="row row-fluid">
-	<div id="links" class="span4">
-	<% @product.pictures.each do |picture| %>
-		<a href="<%= picture.asset.url %>">
-			<% if picture == Picture.first %>
-				<img src="<%= picture.asset.url(:medium) %>"
-			<% end %>
-		</a>
-	<% end %>
+	<div class="container-fluid span12" id="show_product">
+	  <div class="row-fluid">
+	    <section class="product_image span6">
+	      <% if @product.pictures.exists? %>
+		      <div id="links">
+				<% @product.pictures.each do |picture| %>
+					<a href="<%= picture.asset.url %>" id="gallery">
+						<% if picture == Picture.first %>
+							<img src="<%= picture.asset.url(:medium) %>"
+						<% end %>
+					</a>
+				<% end %>
+				<p>View all images above</p>
+			  </div>
+		  <% else %>
+		  	<%= image_tag @product.gallery.url(:medium) %>
+		  <% end %>
+	    </section>
+	    <section class="info_right span6">
+	      <section class="product_description offset3 span9">
+	      <p><%= @product.description %></p>
+	      </section>
+	      <section class="offset3 span9">
+	        <br />
+	        <p><em>
+	          <span class="product_item_id">Product ID: <%= @product.item_id %></span><br />
+	          <span class="product_quantity">Quantity: <%= @product.quantity %> left</span><br />
+	          <span class="product_discount">Discount: <%= @product.discount %> BGN</span>
+	        </em></p><br />
+	      </section>
+	      <section class="product_price_class offset1 span11">
+	        <p>Price class: <%= @product.price_class %></p>
+	      </section>
+	      <section class="product_warranty product_guarantee offset1 span11">
+	        <p>Warranty: <% if @product.warranty? %><%= @product.warranty %><% else %><em>No warranty available</em><% end %><br /><% if @product.guarantee? %>Guarantee: <%= @product.guarantee %><% end %></p>
+	      </section>
+	    </section>
+	  </div>
 	</div>
+	<hr />
 
-	<div class="span8">
+	
+
+
+	<div class="span12">
+		<h3 class="text-center">Order now</h3>
 		<%= render 'form' %>
 		<p>The final price of your order is: <%= @product.price %> BGN.</p>
 	</div>

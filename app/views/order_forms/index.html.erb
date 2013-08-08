@@ -3,10 +3,14 @@
 
 <% @order.each do |order| %>
 	<div id="orders">
-		<h3><%= order.title %></h3>
-		<p><%= order.name %> has ordered <%= @product.title %></p>
-		<p>Email: <%= order.email %></p>
-		<p>Message: <em><%= order.message %></em></p>
+		
+			<p><%= order.name %> has ordered <%= order.product.title %> | id: <%= order.product_id %></p>
+			<p><%= order.city %>, <%= order.address_type %>, <%= order.address %></p>
+			<p>Message: <em><%= order.message %></em></p>
+			<p>Quantity: <% order.quantity %></p>
+			<p>Email: <%= order.email %></p>
+			<p>Price per quantity: <%= order.product.price %></p>
+			<p>Add a Boolean for hiding the order when shpped but do not delete shipped orders!</p>
 	</div>
 	<hr />
 <% end %>

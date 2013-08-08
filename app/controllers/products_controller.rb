@@ -11,6 +11,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def featured
+    @products = Product.all
+
+
+    respond_to do |format|
+      format.html # featured.html.erb
+      format.json { render json: @products }
+    end
+  end
+
+  def faq
+    
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show

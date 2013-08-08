@@ -1,15 +1,18 @@
 class OrderFormsController < ApplicationController
+	before_filter :authenticate_admin!, only: [:index]
 	before_filter :find_product
 	#before_filter :find_order
 
 
 
 	def index
-		@order = @product.order_forms.all
+		#@order = @product.order_forms.all
+		@order = OrderForm.all
 	end
 
 	def new
 		@order = OrderForm.new
+		@product = Product.find(params[:product_id])
 
 	    respond_to do |format|
 	      format.html # new.html.erb
@@ -22,7 +25,7 @@ class OrderFormsController < ApplicationController
 
 		respond_to do |format|
 			if @order.save
-				format.html { redirect_to product_order_forms_path(@product), notice: 'Order was successfuly placed!' }
+				format.html { redirect_to root_path, notice: 'Order was successfuly placed!' }
 			else
 				format.html { render action: "new" }
 			end
@@ -38,7 +41,6 @@ class OrderFormsController < ApplicationController
 	end
 
 	def find_product
-	    @product = Product.find(params[:product_id])
 	end
 
 

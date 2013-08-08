@@ -15,15 +15,15 @@
 			</div>
 			<div id="nav" class="span9">
                 <ul class="menu nav nav-pills pull-right" id="myTab">
-                    <li><a href="#featured-index" data-toggle="tab">Featured</a></li>
-                    <li><a href="#products-index" data-toggle="tab">Catalog</a></li>
-                    <li><a href="#faq-index" data-toggle="tab">F.A.Q.</a></li>
-                    <li><%= link_to "Index Pictures", @product_pictures_path %></li>
+                    <li><%= link_to "Featured", root_path %></li>
+                    <li><%= link_to "Catalog", products_path %></li>
+                    <li><%= link_to "F.A.Q.", faq_path %></li>
                 </ul>
 				<% if admin_signed_in? %>
 					<ul class="menu nav nav-pills pull-right">
 						<li><%= link_to "logged in as " + current_admin.profile_name, edit_admin_registration_path %></li>
 						<li><%= link_to "Add new Product", new_product_path %></li>
+						<li><%= link_to "All Orders", orders_path %></li>
 						<li><%= link_to "Log out", destroy_admin_session_path, method: :delete %></li>
 					</ul>
 				<% end %>
@@ -48,17 +48,6 @@
 			  <%= javascript_include_tag "application" %>
 		</div>
 	</div>
-                <script>
-                window.onload = function () {
-              document.getElementById('links').onclick = function (event) {
-                  event = event || window.event;
-                  var target = event.target || event.srcElement,
-                      link = target.src ? target.parentNode : target,
-                      options = {index: link, event: event},
-                      links = this.getElementsByTagName('a');
-                  blueimp.Gallery(links, options);
-              };
-            };
-              </script>
+                
 </body>
 </html>

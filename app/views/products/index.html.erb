@@ -1,133 +1,43 @@
-<div class="tab-content">
-
-    <!-- THIS IS THE INDEX PAGE -->
-
-    <div class="tab-pane" id="products-index">
-        <h1>Welcome to our catalog!</h1>
-        <ul id="products-list" class="row-fluid">
-          <% @products.each do |product| %>
-                    <li id="product-thumb" class="product">
-                        <div class="span6">
-                            <div class="row-fluid">
-                                <div class="span4">
-                                    <a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= image_tag product.gallery.url(:thumb) %></a>
-                                          <div id="links">
-                                            <% product.pictures.each do |picture| %>
-                                                  <a href="<%= picture.asset.url %>">
-                                                      <% if picture == Picture.first %>
-                                                        <img src="<%= picture.asset.url(:thumb) %>">
-                                                      <% end %>
-                                                  </a>
-                                            <% end %>
-                                        </div>
-                                        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-                                          <% product.pictures.each do |picture| %>
-                                            <div class="slides"></div>
-                                            <h3 class="title"></h3>
-                                            <a class="prev">‹</a>
-                                            <a class="next">›</a>
-                                            <a class="close">×</a>
-                                            <a class="play-pause"></a>
-                                            <ol class="indicator"></ol>
-                                          <% end %>
-                                        </div>
-                                    <p><em><span class="product_price_class_thumb">Class: <%= product.price_class %></span></em></p>
-                                </div>
-                                <div class="span8">
-                                    <h3><a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= product.title %></a></h3>
-                                    <p><em><%= truncate(product.description, length: 60) %></em></p>
-                                </div>
-                                <ul class="span12 admin">
-                                    <% if admin_signed_in? %>
-                                        <li><%= link_to 'Show', product %></li>
-                                        <li><%= link_to 'Edit', edit_product_path(product) %></li>
-                                        <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-                                        <li><%= link_to 'New Picture', new_product_picture_path(product), class: 'btn btn-primary' %></li>
-                                    <% end %>
-                                </ul>
-                            </div>
+<h1>Welcome to our catalog!</h1>
+<ul id="products-list" class="row-fluid">
+  <% @products.each do |product| %>
+            <li id="product-thumb" class="product">
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <% if product.pictures.exists? %>
+                              <div id="links">
+                                <% product.pictures.each do |picture| %>
+                                  <a href="<%= picture.asset.url %>" id="gallery">
+                                      <% if picture == Picture.first %>
+                                        <img src="<%= picture.asset.url(:thumb) %>">
+                                      <% end %>
+                                  </a>
+                                <% end %>
+                              </div>
+                            <% else %>
+                            <a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= image_tag product.gallery.url(:thumb) %></a>
+                            <% end %>
+                            <p><em><span class="product_price_class_thumb">Class: <%= product.price_class %></span></em></p>
                         </div>
-                    </li>
-
-            <% end %>
-        </ul>
-    </div>
-
-<!-- THIS IS THE FEATURED PAGE WITH DETAILED DESCRIPTIONS -->
-
-    <div class="tab-pane active" id="featured-index">
-        <!-- FEATURED PAGE WITH CAROUSEL -->
-        <!-- the script starts the carousel on load due to the element nested in a tab -->
-        <script>
-            $(document).ready(function(){$('.carousel').carousel();});
-        </script>
-
-        <div id="myCarousel" class="carousel slide">
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-          </ol>
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <% if Product.exists?(3) %>
-            <% @products.last(3).each do |product| %>
-            <% if product == @products[-3] %>
-                <div id="add-class-to-carousel" class="item active">
-            <% else %>
-                <div id="add-class-to-carousel" class="item">
-            <% end %>
-                
-                <a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal">
-                <div class="container-fluid" id="show_product">
-                  <div class="row-fluid">
-                    <section class="span12">
-                      <h1>
-                        <span class="product_title span11"><%= product.title %></span>
-                      </h1>
-                        <div class="span12"><p><hr /></p></div>
-                    </section>
-                    <section class="product_image span5">
-                        <%= image_tag product.gallery.url(:medium) %>
-                    </section>
-                    <section class="info_right span6">
-                      <section class="product_description offset3 span9">
-                      <p><%= product.description %></p>
-                      </section>
-                      <section class="offset3 span9">
-                        <br />
-                        <p><em>
-                          <span class="product_item_id">Product ID: <%= product.item_id %></span><br />
-                          <span class="product_quantity">Quantity: <%= product.quantity %> left</span><br />
-                          <span class="product_discount">Discount: <%= product.discount %> BGN</span>
-                        </em></p><br />
-                      </section>
-                      <section class="product_price_class offset1 span11">
-                        <p>Price class: <%= product.price_class %></p>
-                      </section>
-                      <section class="product_warranty product_guarantee offset1 span11">
-                        <p>Warranty: <% if product.warranty? %><%= product.warranty %><% else %><em>No warranty available</em><% end %><br /><% if product.guarantee? %>Guarantee: <%= product.guarantee %><% end %></p>
-                      </section>
-                    </section>
-
-                  </div>
+                        <div class="span8">
+                            <h3><a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= product.title %></a></h3>
+                            <p><em><%= truncate(product.description, length: 60) %></em></p>
+                        </div>
+                        <ul class="span12 admin">
+                            <% if admin_signed_in? %>
+                                <li><%= link_to 'Show', product %></li>
+                                <li><%= link_to 'Edit', edit_product_path(product) %></li>
+                                <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                                <li><%= link_to 'New Picture', new_product_picture_path(product), class: 'btn btn-primary' %></li>
+                            <% end %>
+                        </ul>
+                    </div>
                 </div>
-                </a>
+            </li>
 
-            </div>
-            <% end %>
-            <% end %>
-          </div>
-          <!-- Carousel nav -->
-          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-
-
-    </div>
-
-
-<!-- THIS IS THE PREVIEW MODAL -->
+    <% end %>
+</ul>
 
 <% @products.each do |product| %>
 <div id="<%= product.title.gsub(/\s+/, "") %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -158,16 +68,17 @@
                 <p>Price class: <%= product.price_class %></p>
               </section>
               <section class="product_warranty product_guarantee offset1 span11">
-                <p>Warranty: <%= product.warranty %><br />Guarantee: <%= product.guarantee %></p>
+                <p>Warranty: <% if product.warranty? %><%= product.warranty %><% else %><em>No warranty available</em><% end %><br /><% if product.guarantee? %>Guarantee: <%= product.guarantee %><% end %></p>
               </section>
             </section>
           </div>
         </div>
     </div>
     <div class="modal-footer">
+        <a class="btn pull-right" data-dismiss="modal" aria-hidden="true">Back</a>
         <%= link_to "Order now!", new_product_order_form_path(product), class: "btn btn-success" %>
-        <a href="#faq-index" class="btn btn-info" data-toggle="tab" data-dismiss="modal" aria-hidden="true">How to order?</a>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Back</button>
+        <%= link_to "How to order?", faq_path, class: 'btn btn-info pull-right' %>
+        
         <% if admin_signed_in? && @product %>
             <%= link_to 'Edit', edit_product_path(@product) %>
         <% end %>
@@ -175,76 +86,17 @@
 </div>
 <% end %>
 
-    <!-- THIS IS THE FAQ PAGE -->
 
-    <div class="tab-pane" id="faq-index">
-        <div class="accordion" id="accordion2">
-          
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                <h3>How to order?</h3>
-              </a>
-            </div>
-            <div id="collapseOne" class="accordion-body collapse in">
-              <div class="accordion-inner">
-                <p>To order you must simply send an email to office@jewellerybox.bg with the following information:</p>
-                <ol>
-                    <li>The name of the product you want to purchase</li>
-                    <li>The ID of that same item</li>
-                    <li>The quantity you want</li>
-                    <li>Your name and shipping address</li>
-                </ol>
-                <p>Thats all! Good luck</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                <h4>What is included in the package?</h4>
-              </a>
-            </div>
-            <div id="collapseTwo" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <p>The package includes:</p>
-                <ol>
-                    <li>The product you ordered</li>
-                    <li>A jewellery box</li>
-                    <li>A jewellery bag (optional)</li>
-                    <li>A cleaning cloth (optional)</li>
-                    <li>A warranty card (optional)</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                    <h4>Can I order as a Gift?</h4>
-                </a>
-            </div>
-            <div id="collapseThree" class="accordion-body collapse">
-                <div class="accordion-inner">
-                    <p>You can order as a gift and include the following extras:<p>
-                    <ol>
-                        <li>Rose paddles</li>
-                        <li>Wish card</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-
-          <!-- End of Accordion -->
-        </div>
-    </div>
-
-
-
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <% @products.each do |product| %>
+  <% product.pictures.each do |picture| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  <% end %>
+  <% end %>
 </div>
-
-
-
-

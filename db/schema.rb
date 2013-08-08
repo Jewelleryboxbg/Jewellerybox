@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728192021) do
+ActiveRecord::Schema.define(:version => 20130808144805) do
 
   create_table "admins", :force => true do |t|
     t.string   "profile_name"
@@ -36,10 +36,14 @@ ActiveRecord::Schema.define(:version => 20130728192021) do
     t.integer  "product_id"
     t.string   "name"
     t.string   "email"
-    t.string   "title"
     t.text     "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "phone"
+    t.string   "city"
+    t.string   "address"
+    t.boolean  "address_type", :default => false
+    t.integer  "quantity",     :default => 1
   end
 
   add_index "order_forms", ["product_id"], :name => "index_order_forms_on_product_id"

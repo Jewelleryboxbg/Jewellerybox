@@ -10,14 +10,18 @@ Jewelleryboxbg::Application.routes.draw do
   resources :products do
     resources :pictures
     resources :order_forms
-    resources :order_form
+    #resources :order_form
   end
 
   as :admin do
     get '/admin', to: 'devise/sessions#new', as: :login
   end
 
-  root to: 'products#index'
+  root to: 'products#featured'
+  match '/featured' => 'products#featured'
+  match '/faq' => 'products#faq'
+  match '/featured2' => 'order_forms#featured'
+  match '/orders' => 'order_forms#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
