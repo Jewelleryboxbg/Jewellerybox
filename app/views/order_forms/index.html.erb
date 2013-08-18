@@ -1,16 +1,24 @@
-<h1>This is the Order Page</h1>
+<h2>All Orders</h2>
 <hr />
 
 <% @order.each do |order| %>
 	<div id="orders">
-		
-			<p><%= order.name %> has ordered <%= order.product.title %> | id: <%= order.product_id %></p>
-			<p><%= order.city %>, <%= order.address_type %>, <%= order.address %></p>
-			<p>Message: <em><%= order.message %></em></p>
-			<p>Quantity: <% order.quantity %></p>
-			<p>Email: <%= order.email %></p>
-			<p>Price per quantity: <%= order.product.price %></p>
-			<p>Add a Boolean for hiding the order when shpped but do not delete shipped orders!</p>
+			<h3><%= order.id %># '<%= order.name %>' has ordered <%= order.quantity %> x '<%= order.product.title %>' | id: <%= order.product_id %></h3>
+			<h4>Ship to: <%= order.city %>, <% if order.address_type == true %>Ekont office: <% else %>Home Address: <% end %><%= order.address %></h4>
+			<h4>TOTAL: 
+				<%= total_order(order) %> BGN (without shipping costs)
+			</h4>
+			<br />
+			<p>Additional Info:</p>
+			<p><% if !order.message.blank? %>Message: <em><%= order.message %></em> <% else %>No message<% end %></p>
+			<p>Price per item: <% if order.product.discount %><%= order.product.price - order.product.discount %> BGN with discount.<% else %> <%= order.product.price %> BGN.<% end %> | Quantity ordered: <%= order.quantity %></p>
+			<br />
+			<p>Phone: <%= order.phone %></p>
+			<p><% if !order.email.blank? %>Email: <%= order.email %><% else %>No email<% end %></p>
+
+			<p><a href="#" class="btn btn-success">Yes I shipped <%= order.quantity %> x <%= order.product.title %> to <%= order.name %> for <%= total_order(order) %> BGN</a></p>
+			<%= link_to "Shipped", shipped_path(order.id) %>
+
 	</div>
 	<hr />
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808144805) do
+ActiveRecord::Schema.define(:version => 20130818183548) do
 
   create_table "admins", :force => true do |t|
     t.string   "profile_name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130808144805) do
     t.string   "address"
     t.boolean  "address_type", :default => false
     t.integer  "quantity",     :default => 1
+    t.boolean  "shipped",      :default => false
   end
 
   add_index "order_forms", ["product_id"], :name => "index_order_forms_on_product_id"

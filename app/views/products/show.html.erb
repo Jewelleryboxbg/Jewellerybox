@@ -1,5 +1,48 @@
-<p id="notice"><%= notice %></p>
+  <div class="container-fluid" id="show_product">
+    <div class="row-fluid">
+      <section class="product_image span6">
+        <% if @product.pictures.exists? %>
+              <div id="links">
+                <% @product.pictures.each do |picture| %>
+                  <a href="<%= picture.asset.url %>" id="gallery">
+                      <% if picture == @product.pictures.first %>
+                        <img src="<%= picture.asset.url(:medium) %>">
+                      <% end %>
+                  </a>
+                <% end %>
+                <p class="text-center">Click image for more.</p>
+              </div>
+            <% else %>
+        <%= image_tag @product.gallery.url(:medium) %>
+      <% end %>
+      </section>
+      <section class="info_right span6">
+        <section class="product_description offset3 span9">
+        <p><%= @product.description %></p>
+        </section>
+        <section class="offset3 span9">
+          <br />
+          <p><em>
+            <span class="product_item_id">Product ID: <%= @product.item_id %></span><br />
+            <span class="product_quantity">Quantity: <%= @product.quantity %> left</span><br />
+            <span class="product_discount">Discount: <%= @product.discount %> BGN</span>
+          </em></p><br />
+        </section>
+        <section class="product_price_class offset1 span11">
+          <p>Price class: <%= @product.price_class %></p>
+        </section>
+        <section class="product_warranty product_guarantee offset1 span11">
+          <p>Warranty: <% if @product.warranty? %><%= @product.warranty %><% else %><em>No warranty available</em><% end %><br /><% if @product.guarantee? %>Guarantee: <%= @product.guarantee %><% end %></p>
+        </section>
+      </section>
+      <%= link_to "Order Now!", new_product_order_form_path(@product), class: 'btn btn-primary btn-large' %>
+      <%= link_to "How to order?", faq_path, class: 'btn btn-info pull-right' %>
+      <%= link_to "Back", products_path, class: 'btn pull-right' %>
+    </div>
+  </div>
 
+
+<% if false %>
 <div class="container-fluid" id="show_product">
   <div class="row-fluid">
     <section class="span12">
@@ -47,11 +90,24 @@
     </div>
   </div>
 
+  <%= link_to 'Add pictures to Gallery', product_pictures_path(@product), class: 'btn btn-primary' %>
 
 
 
 
 
 </div>
+<% end %>
 
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <% @product.pictures.each do |picture| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  <% end %>
+</div>
 

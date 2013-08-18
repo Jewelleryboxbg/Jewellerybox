@@ -22,6 +22,7 @@ Jewelleryboxbg::Application.routes.draw do
   match '/faq' => 'products#faq'
   match '/featured2' => 'order_forms#featured'
   match '/orders' => 'order_forms#index'
+  match '/orders/shipped' => 'order_forms#shipped', :as => :shipped
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -2,6 +2,10 @@
     $(document).ready(function(){$('.carousel').carousel();});
 </script>
 
+<h2 class="text-center">Welcome to Jewellerybox,</h2>
+<h4 class="text-center">beautiful, sophisticated silver jewellery, each week.</h4>
+<br />
+
 <div id="myCarousel" class="carousel slide">
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -18,7 +22,6 @@
         <% else %>
             <div id="add-class-to-carousel" class="item">
         <% end %>
-              <div id="">
                 <div class="container-fluid" id="show_product">
                   <div class="row-fluid">
                     <section class="span12">
@@ -32,10 +35,11 @@
                         <div id="links">
                         <% product.pictures.each do |picture| %>
                           <a href="<%= picture.asset.url %>" id="gallery">
-                            <% if picture == Picture.first %>
+                            <% if picture == product.pictures.first %>
                               <img src="<%= picture.asset.url(:medium) %>">
                             <% end %>
                           </a>
+                          <p class="text-center">Click image for more.</p>
                         <% end %>
                         </div>
                       <% else %>
@@ -73,10 +77,6 @@
 
                   </div>
                 </div>
-              </div>
-              <div class="span12">
-                
-              </div>
           </div>
       <% end %>
     <% end %>

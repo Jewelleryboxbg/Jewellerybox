@@ -1,4 +1,4 @@
-<h1>Listing pictures <%= link_to 'New Picture', new_product_picture_path(@product), class: 'btn btn-primary' %></h1>
+<h1>Listing pictures for <%= @product.title %> #<%= @product.item_id %> <%= link_to 'New Picture', new_product_picture_path(@product), class: 'btn btn-primary' %></h1>
 
 <% @pictures.each do |picture| %>
   <ul class="thumbnails">

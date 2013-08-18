@@ -5,20 +5,19 @@
 	<div class="span12">
 		<%= f.input :name, input_html: { class: 'input-xxlarge' }, label: 'Full name' %>
 	</div>
-	<div class="span5">
+	<div class="span6">
 		<%= f.input :city, placeholder: '(Sofia / София)', input_html: { class: 'input-xlarge' } %>
 	</div>
 	<div class="span4">
 		<%= f.input :phone, input_html: { class: '' } %>
 	</div>
-
 	
 	<div class="span12">
 	<%= f.input :address_type, inline_label: 'Yes, Ship to EKONT office', label: 'Shipping to a EKONT office?' %>
 	<%= f.input :address, input_html: { class: 'input-xxlarge' }, placeholder: '(Улица/Булевард, №, бл., вх., ет., ап.)' %>
-	<%= f.input :message, input_html: { class: 'input-xxlarge', rows: 4 }, placeholder: '(Size, color, etc...)' %>
+	<%= f.input :message, label: 'Message, if any', input_html: { class: 'input-xxlarge', rows: 4 }, placeholder: '(Size, color, etc...)' %>
 	</div>
-	<div class="span5">
+	<div class="span6">
 		<%= f.input :quantity, label: 'How many would you like to order?', input_html: { class: 'input-xlarge' } %>
 	</div>
 	<div class="span4">
@@ -28,6 +27,6 @@
 </div>
 
 <div>
-	<%= f.button :submit, data: { confirm: "Confirm order?" }, class: 'btn btn-success pull-right' %>
+	<%= f.button :submit, data: { confirm: "Confirm Order! After confirming you will be contacted by EKONT Express to receive your order. Thank you!" }, class: 'btn btn-success pull-right' %>
 </div>
 <% end %>

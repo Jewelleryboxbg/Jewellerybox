@@ -1,21 +1,22 @@
-<h1><%= @product.title %></h1>
+<h2 class="text-center">To order <%= @product.title %>,</h2>
+<h4 class="text-center">fill in the form below in any language and submit it. We will handle the rest.</h4>
+<hr />
 
-<div class="row row-fluid">
-	<div class="container-fluid span12" id="show_product">
+	<div class="container-fluid" id="show_product">
 	  <div class="row-fluid">
 	    <section class="product_image span6">
 	      <% if @product.pictures.exists? %>
-		      <div id="links">
-				<% @product.pictures.each do |picture| %>
-					<a href="<%= picture.asset.url %>" id="gallery">
-						<% if picture == Picture.first %>
-							<img src="<%= picture.asset.url(:medium) %>"
-						<% end %>
-					</a>
-				<% end %>
-				<p>View all images above</p>
-			  </div>
-		  <% else %>
+              <div id="links">
+                <% @product.pictures.each do |picture| %>
+                  <a href="<%= picture.asset.url %>" id="gallery">
+                      <% if picture == @product.pictures.first %>
+                        <img src="<%= picture.asset.url(:medium) %>">
+                      <% end %>
+                  </a>
+                <% end %>
+                <p class="text-center">Click image for more.</p>
+              </div>
+            <% else %>
 		  	<%= image_tag @product.gallery.url(:medium) %>
 		  <% end %>
 	    </section>
@@ -38,21 +39,28 @@
 	        <p>Warranty: <% if @product.warranty? %><%= @product.warranty %><% else %><em>No warranty available</em><% end %><br /><% if @product.guarantee? %>Guarantee: <%= @product.guarantee %><% end %></p>
 	      </section>
 	    </section>
-	  </div>
+	    <hr />
+	    <div class="span12">
+			<h3 class="text-center">Order now</h3>
+			<%= render 'form' %>
+			<p class="final_price_text">TOTAL:
+			<% if @product.discount %>
+				<span class="final_price"><%= @product.price - @product.discount %> BGN</span> (per ITEM)</p>
+				<p>with <%= @product.discount %> BGN discount!</p>
+			<% else %>
+				<span class="final_price_text"><span class="final_price"><%= @product.price %> BGN</span> (per ITEM)</span></p>
+			<% end %>
+
+			<%= link_to 'Cancel', root_url, class: 'btn pull-right' %>
+	    </div>
+
+      </div>
 	</div>
-	<hr />
 
 	
 
 
-	<div class="span12">
-		<h3 class="text-center">Order now</h3>
-		<%= render 'form' %>
-		<p>The final price of your order is: <%= @product.price %> BGN.</p>
-	</div>
-
-	<%= link_to 'Cancel', root_url, class: 'btn pull-right' %>
-</div>
+	
 
 
 

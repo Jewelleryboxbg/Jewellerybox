@@ -1,4 +1,5 @@
-<h1>Welcome to our catalog!</h1>
+<h2 class="text-center">Browse our catalog,</h2>
+<h4 class="text-center">the whole collection of precious silver accessories.</h4>
 <ul id="products-list" class="row-fluid">
   <% @products.each do |product| %>
             <li id="product-thumb" class="product">
@@ -6,22 +7,20 @@
                     <div class="row-fluid">
                         <div class="span4">
                             <% if product.pictures.exists? %>
-                              <div id="links">
                                 <% product.pictures.each do |picture| %>
-                                  <a href="<%= picture.asset.url %>" id="gallery">
-                                      <% if picture == Picture.first %>
+                                  <a href="<%= product_path(product) %>">
+                                      <% if picture == product.pictures.first %>
                                         <img src="<%= picture.asset.url(:thumb) %>">
                                       <% end %>
                                   </a>
                                 <% end %>
-                              </div>
                             <% else %>
-                            <a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= image_tag product.gallery.url(:thumb) %></a>
+                            <a href="<%= product_path(product) %>" role="button" data-toggle="modal"><%= image_tag product.gallery.url(:thumb) %></a>
                             <% end %>
                             <p><em><span class="product_price_class_thumb">Class: <%= product.price_class %></span></em></p>
                         </div>
                         <div class="span8">
-                            <h3><a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal"><%= product.title %></a></h3>
+                            <h3><a href="#<%= product.title.gsub(/\s+/, "") %>" role="button" data-toggle="modal" class="index_product_title"><%= product.title %></a></h3>
                             <p><em><%= truncate(product.description, length: 60) %></em></p>
                         </div>
                         <ul class="span12 admin">
@@ -29,7 +28,7 @@
                                 <li><%= link_to 'Show', product %></li>
                                 <li><%= link_to 'Edit', edit_product_path(product) %></li>
                                 <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-                                <li><%= link_to 'New Picture', new_product_picture_path(product), class: 'btn btn-primary' %></li>
+                                <li><%= link_to 'Gallery', product_pictures_path(product), class: 'btn btn-primary' %></li>
                             <% end %>
                         </ul>
                     </div>
@@ -50,7 +49,7 @@
         <div class="container-fluid" id="show_product">
           <div class="row-fluid">
             <section class="product_image span6">
-              <%= image_tag product.gallery.url(:medium) %>
+              <%= link_to image_tag(product.gallery.url(:medium)), product_path(product) %>
             </section>
             <section class="info_right span6">
               <section class="product_description offset3 span9">

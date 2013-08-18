@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_filter :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :find_product
   # GET /products
   # GET /products.json
   def index
@@ -28,7 +29,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.find(params[:id])
+    #@product = Product.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -49,7 +50,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
+    #@product = Product.find(params[:id])
   end
 
   # POST /products
@@ -94,5 +95,9 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url }
       format.json { head :no_content }
     end
+  end
+
+  def find_product
+    @product = Product.find_by_id(params[:id])
   end
 end
