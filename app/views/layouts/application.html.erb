@@ -3,8 +3,6 @@
 <head>
   <title>Jewelleryboxbg</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "jquery.js" %>
-
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -43,11 +41,9 @@
 					<%= flash[:alert] %>
 				</div>
 			<% end %>
-
 			<%= yield %>
-			  <%= javascript_include_tag "application" %>
 		</div>
 	</div>
-                
+    <%= javascript_include_tag "application" %>     
 </body>
 </html>
