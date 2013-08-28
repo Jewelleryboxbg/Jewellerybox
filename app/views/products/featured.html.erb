@@ -32,18 +32,15 @@
                     </section>
                     <section class="product_image span5">
                       <% if product.pictures.exists? %>
-                        <div id="links">
-                        <% product.pictures.each do |picture| %>
-                          <a href="<%= picture.asset.url %>" id="gallery">
-                            <% if picture == product.pictures.first %>
-                              <img src="<%= picture.asset.url(:medium) %>">
-                            <% end %>
-                          </a>
-                          <p class="text-center">Click image for more.</p>
-                        <% end %>
-                        </div>
+                          <% product.pictures.order('updated_at DESC').each do |picture| %>
+                            <a href="<%= product_path(product) %>">
+                                <% if picture == product.pictures.last %>
+                                  <img src="<%= picture.asset.url(:medium) %>">
+                                <% end %>
+                            </a>
+                          <% end %>
                       <% else %>
-                        <%= image_tag product.gallery.url(:medium) %>
+                        <%= link_to image_tag(product.gallery.url(:medium)), product_path(product) %>
                       <% end %>
                     </section>
                     <section class="info_right span6">
@@ -84,46 +81,4 @@
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
-
-<% if false %>
-<% @products.each do |product| %>
-<div id="<%= product.title.gsub(/\s+/, "") %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3><span class="product_title"><%= product.title %></span></h3>
-    </div>
-    <div class="modal-body">
-        <div class="container-fluid" id="show_product">
-          <div class="row-fluid">
-            <section class="product_image span6">
-              <%= image_tag product.gallery.url(:medium) %>
-            </section>
-            <section class="info_right span6">
-              <section class="product_description offset3 span9">
-              <p><%= product.description %></p>
-              </section>
-            </section>
-            <select class="span12">
-            </select>
-          </div>
-        </div>
-    </div>
-</div>
-<% end %>
-<% end %>
-
-
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-  <% @products.each do |product| %>
-  <% product.pictures.each do |picture| %>
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
-  <% end %>
-  <% end %>
 </div>

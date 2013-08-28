@@ -1,11 +1,12 @@
+  <h1 class="text-center"><%= @product.title %></h1>
   <div class="container-fluid" id="show_product">
     <div class="row-fluid">
       <section class="product_image span6">
         <% if @product.pictures.exists? %>
               <div id="links">
-                <% @product.pictures.each do |picture| %>
+                <% @product.pictures.order('updated_at DESC').each do |picture| %>
                   <a href="<%= picture.asset.url %>" id="gallery">
-                      <% if picture == @product.pictures.first %>
+                      <% if picture == @product.pictures.last %>
                         <img src="<%= picture.asset.url(:medium) %>">
                       <% end %>
                   </a>
@@ -36,6 +37,9 @@
         </section>
       </section>
       <%= link_to "Order Now!", new_product_order_form_path(@product), class: 'btn btn-primary btn-large' %>
+      <% if admin_signed_in? %>
+      <%= link_to "Gallery", product_pictures_path(@product), class: 'btn btn-success btn-large' %>
+      <% end %>
       <%= link_to "How to order?", faq_path, class: 'btn btn-info pull-right' %>
       <%= link_to "Back", products_path, class: 'btn pull-right' %>
     </div>
@@ -100,7 +104,6 @@
 <% end %>
 
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-  <% @product.pictures.each do |picture| %>
     <div class="slides"></div>
     <h3 class="title"></h3>
     <a class="prev">‹</a>
@@ -108,6 +111,5 @@
     <a class="close">×</a>
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
-  <% end %>
 </div>
 

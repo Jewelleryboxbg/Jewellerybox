@@ -7,7 +7,7 @@ class PicturesController < ApplicationController
   # GET /pictures.json
   def index
     #@pictures = Picture.all
-    @pictures = @product.pictures.all
+    @pictures = @product.pictures.order('updated_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -85,7 +85,7 @@ class PicturesController < ApplicationController
     @picture.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to product_pictures_path(@product) }
       format.json { head :no_content }
     end
   end

@@ -7,9 +7,9 @@
 	    <section class="product_image span6">
 	      <% if @product.pictures.exists? %>
               <div id="links">
-                <% @product.pictures.each do |picture| %>
+                <% @product.pictures.order('updated_at DESC').each do |picture| %>
                   <a href="<%= picture.asset.url %>" id="gallery">
-                      <% if picture == @product.pictures.first %>
+                      <% if picture == @product.pictures.last %>
                         <img src="<%= picture.asset.url(:medium) %>">
                       <% end %>
                   </a>
@@ -50,7 +50,6 @@
 			<% else %>
 				<span class="final_price_text"><span class="final_price"><%= @product.price %> BGN</span> (per ITEM)</span></p>
 			<% end %>
-
 			<%= link_to 'Cancel', root_url, class: 'btn pull-right' %>
 	    </div>
 
@@ -66,7 +65,6 @@
 
 
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-  <% @product.pictures.each do |picture| %>
     <div class="slides"></div>
     <h3 class="title"></h3>
     <a class="prev">‹</a>
@@ -74,5 +72,4 @@
     <a class="close">×</a>
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
-  <% end %>
 </div>

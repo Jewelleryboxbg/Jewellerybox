@@ -7,9 +7,9 @@
                     <div class="row-fluid">
                         <div class="span4">
                             <% if product.pictures.exists? %>
-                                <% product.pictures.each do |picture| %>
+                                <% product.pictures.order('updated_at DESC').each do |picture| %>
                                   <a href="<%= product_path(product) %>">
-                                      <% if picture == product.pictures.first %>
+                                      <% if picture == product.pictures.last %>
                                         <img src="<%= picture.asset.url(:thumb) %>">
                                       <% end %>
                                   </a>
@@ -49,7 +49,17 @@
         <div class="container-fluid" id="show_product">
           <div class="row-fluid">
             <section class="product_image span6">
-              <%= link_to image_tag(product.gallery.url(:medium)), product_path(product) %>
+              <% if product.pictures.exists? %>
+                  <% product.pictures.order('updated_at DESC').each do |picture| %>
+                    <a href="<%= product_path(product) %>">
+                        <% if picture == product.pictures.last %>
+                          <img src="<%= picture.asset.url(:medium) %>">
+                        <% end %>
+                    </a>
+                  <% end %>
+              <% else %>
+                  <%= link_to image_tag(product.gallery.url(:medium)), product_path(product) %>
+              <% end %>
             </section>
             <section class="info_right span6">
               <section class="product_description offset3 span9">
@@ -86,16 +96,3 @@
 <% end %>
 
 
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-  <% @products.each do |product| %>
-  <% product.pictures.each do |picture| %>
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
-  <% end %>
-  <% end %>
-</div>
