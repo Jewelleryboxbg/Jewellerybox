@@ -7,6 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'rmagick', '2.13.2'
 gem 'paperclip', '~> 3.0'
+gem 'aws-sdk'
 gem 'devise'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
