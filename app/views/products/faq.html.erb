@@ -1,5 +1,6 @@
 <h2 class="text-center">Frequently Asked Questions,</h2>
 <h4 class="text-center">find the answers you are looking for.</h4>
+<p class="text-center"><%= link_to "BG", faq_bg_path, class: 'btn btn-small' %></p>
 <div class="tab-pane" id="faq-index">
     <div class="accordion" id="accordion2">
       
@@ -9,16 +10,19 @@
             <h3>How to order?</h3>
           </a>
         </div>
-        <div id="collapseOne" class="accordion-body collapse in">
+        <div id="collapseOne" class="accordion-body collapse">
           <div class="accordion-inner">
-            <p>To order you must simply send an email to office@jewellerybox.bg with the following information:</p>
+            <h5>Order in 3 easy steps</h5>
             <ol>
-                <li>The name of the product you want to purchase</li>
-                <li>The ID of that same item</li>
-                <li>The quantity you want</li>
-                <li>Your name and shipping address</li>
+                <li>Chose a product and click <strong>Order Now</strong></li>
+                <li>Fill in the Order Form</li>
+                <li>Ekont Express will notify you when your order has arrived</li>
             </ol>
-            <p>Thats all! Good luck</p>
+            <hr />
+            <p>
+              Ordering products from <strong>www.jewellerybox.bg</strong> does not require a registration. After choosing your product click the <strong>Order Now</strong> button. You will be redirected to the Order page where you are required to fill in the form with your personal information and order details. Feel free to fill it in in either english or bulgarian language. Not all fields are required, however we value additional details. If the product has options to chose from, such as colors, you must specify them in the <strong>Message</strong> field in the order form. All orders are shipped within 3 working days.
+            </p>
+            <p>If you encounter any issues with your order or you have any other questions feel free to contact us at: <strong>office@jewellerybox.bg</strong></p>
           </div>
         </div>
       </div>
@@ -26,39 +30,88 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-            <h4>What is included in the package?</h4>
+            <h4>What is a Price Class?</h4>
           </a>
         </div>
         <div id="collapseTwo" class="accordion-body collapse">
           <div class="accordion-inner">
-            <p>The package includes:</p>
+            <p>
+              Products purchased from us are often used for gifts, which is why we created Price Class categories. They are designed to give you a sense of the price, yet the actual price is disguised - like any other gift.
+            </p>
             <ol>
-                <li>The product you ordered</li>
-                <li>A jewellery box</li>
-                <li>A jewellery bag (optional)</li>
-                <li>A cleaning cloth (optional)</li>
-                <li>A warranty card (optional)</li>
+              <li><strong>Class A:</strong> 5 - 15 BGN</li>
+              <li><strong>Class AA:</strong> 15 - 30 BGN</li>
+              <li><strong>Class AA:</strong> 30 - 50 BGN</li>
+              <li><strong>Class Lux:</strong> 50+ BGN</li>
             </ol>
           </div>
         </div>
       </div>
 
-    <div class="accordion-group">
+      <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                <h4>Can I order as a Gift?</h4>
+                <h4>What is included in the package?</h4>
             </a>
         </div>
         <div id="collapseThree" class="accordion-body collapse">
             <div class="accordion-inner">
-                <p>You can order as a gift and include the following extras:<p>
-                <ol>
-                    <li>Rose paddles</li>
-                    <li>Wish card</li>
-                </ol>
+              <p>
+                Package contents vary from product to product. You can be sure that it is thoughtfully and carefully wrapped in a Jewellery Box. Some products include a cleaning cloth for silver, cloth jewellery bag, gift bag, or any other additions which would make you or your loved one smile.
+              </p>
+              <p>
+                In some cases several products can be shown in one picture on the website. Bare in mind that the price is for 1 product. An exception is made for sets, such as earrings. The pictures we publish are soely aimed at representing the product.
+              </p>
             </div>
         </div>
-    </div>
+      </div>
+
+      <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                <h4>Payment methods and delivery</h4>
+            </a>
+        </div>
+        <div id="collapseFour" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <p>
+                Payment is made the moment you receive your order from Econt Express. The shipping price to an Econt office, according to your residential area varies with 5 BGN. for most cities in Bulgaria. For shipment outside Bulgaria contact us at: office@jewellerybox.bg
+              </p>
+              <ul>
+                <li>Free shipping on orders <strong>Class AAA</strong> and <strong>Class Lux</strong>.</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+
+      <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+                <h4>Warranty and Return policy</h4>
+            </a>
+        </div>
+        <div id="collapseFive" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <p>
+                Not all products have a warranty. If the product you choose has one, it will be present on the page of the product and on the order page.
+              </p>
+              <p>
+                <strong>You can return a purchased product</strong> and we will return your money, only if:
+              </p>
+              <ol>
+                <li>You return the product within 7 days of receiving it.</li>
+                <li>You return the product in it's original condition.</li>
+              </ol>
+              <hr />
+              <p>
+                In case the return of the product is due to your mistake, you are obliged to cover the expenses associated with Econt Express. In case the mistake is ours, the responsibility to cover the expenses is also ours.
+              </p>
+              <small>
+                Example: If you want to return a product because you wanted it with a blue stone, but you <strong>did not state it</strong> when ordering, it is your mistake. If you, however, stated it and we neglected your wish, it is our mistake and our responsibility.
+              </small>
+            </div>
+        </div>
+      </div>
 
       <!-- End of Accordion -->
     </div>

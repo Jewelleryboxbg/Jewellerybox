@@ -26,6 +26,10 @@ class ProductsController < ApplicationController
     
   end
 
+  def faq_bg
+
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show

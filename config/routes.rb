@@ -19,7 +19,8 @@ Jewelleryboxbg::Application.routes.draw do
 
   root to: 'products#featured'
   match '/featured' => 'products#featured'
-  match '/faq' => 'products#faq'
+  match '/faq-en' => 'products#faq', :as => :faq
+  match '/faq-bg' => 'products#faq_bg', :as => :faq_bg
   match '/featured2' => 'order_forms#featured'
   match '/orders' => 'order_forms#index'
   match '/orders/shipped' => 'order_forms#shipped', :as => :shipped
