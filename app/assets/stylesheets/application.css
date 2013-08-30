@@ -86,11 +86,16 @@ h1, h2, h3, h4, h5 {
 	text-transform: uppercase;
 }
 
-#logo {
+#logo-icon {
+	position: absolute;
+	top: 35px;
+	width: 6%;
+	left: 47%;
+	right: 47%
 }
 
-#logo img {
-
+#logo-icon img {
+	height: 40px;
 }
 
 
@@ -208,6 +213,24 @@ div.modal {
 	color: rgb(168,168,168) !important;
 }
 
+.fb-like {
+	margin-top: 5%;
+	padding: 3px;
+}
+
+.fb_iframe_widget {
+	left: 40%;
+	bottom: 0;
+}
+
+.btn-facebook img {
+	width: 22px;
+}
+
+.btn-facebook {
+	padding: 1px 4px 1px 1px;
+	text-align: justify;
+}
 
 /* MISC */
 
